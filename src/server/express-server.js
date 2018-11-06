@@ -4,7 +4,6 @@ const Promise = require("bluebird");
 const express = require("express");
 const app = express();
 const path = require("path");
-const _ = require("lodash");
 
 const setStaticPaths = function() {
   app.use(express.static(path.join(__dirname, "../../dist")));
@@ -12,7 +11,7 @@ const setStaticPaths = function() {
 
 const setDevMiddleware = config => {
   try {
-    const devSetup = require("electrode-archetype-react-app-dev/lib/webpack-dev-express");
+    const devSetup = require("electrode-archetype-react-app-dev/lib/webpack-dev-express"); // eslint-disable-line
     devSetup(app, "http", config.port);
   } catch (err) {
     if (process.env.NODE_ENV !== "production") {
@@ -24,7 +23,7 @@ const setDevMiddleware = config => {
 const setRouteHandler = config =>
   new Promise((resolve, reject) => {
     const webapp = p => (p.startsWith(".") ? path.resolve(p) : p);
-    const registerRoutes = require(webapp(config.webapp.module)); //eslint-disable-line
+    const registerRoutes = require(webapp(config.webapp.module)); // eslint-disable-line
 
     return registerRoutes(app, config.webapp.options, err => {
       if (err) {
@@ -42,8 +41,7 @@ const startServer = config =>
       if (err) {
         reject(err);
       } else {
-        //eslint-disable-next-line
-        console.log(`\nApp listening on port: ${config.port}`);
+        console.log(`\nApp listening on port: ${config.port}`); //eslint-disable-line
         resolve();
       }
     });
