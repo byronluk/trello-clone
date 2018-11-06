@@ -15,7 +15,7 @@ const setDevMiddleware = config => {
     devSetup(app, "http", config.port);
   } catch (err) {
     if (process.env.NODE_ENV !== "production") {
-      console.log("setup dev middleware failed", err);
+      console.log("setup dev middleware failed", err); // eslint-disable-line
     }
   }
 };
