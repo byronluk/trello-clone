@@ -1,6 +1,8 @@
 import reducer from "../../client/reducers";
 
-export default function initTop() {
+export default async function initApp({ awaitInits }) {
+  await awaitInits();
+
   return {
     reducer,
     initialState: {
