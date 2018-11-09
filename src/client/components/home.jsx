@@ -1,5 +1,5 @@
-import "styles/normalize.css";
-import "styles/base.css";
+import "../styles/normalize.css";
+import "../styles/base.css";
 import home from "../styles/home.css";
 
 import React from "react";
@@ -7,8 +7,6 @@ import { connect } from "react-redux";
 import { Nav } from "./nav";
 
 import Typography from "@material-ui/core/Typography";
-
-console.log("hello: ", process.env.HELLO);
 
 class Home extends React.Component {
   constructor(props) {

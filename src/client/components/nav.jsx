@@ -9,8 +9,8 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
-import Auth from "../auth/auth";
-const auth = new Auth();
+// import Auth from "../auth/auth";
+// const auth = new Auth();
 
 export class Nav extends Component {
   constructor(props) {
@@ -26,7 +26,8 @@ export class Nav extends Component {
               Brello
             </Link>
           </Typography>
-          <Button onClick={() => auth.login()} color="inherit">Login</Button>
+          {/*<Button onClick={() => auth.login()} color="inherit">Login</Button>*/}
+          <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
     );
