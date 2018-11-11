@@ -1,6 +1,6 @@
-import "../styles/normalize.css";
-import "../styles/base.css";
-import home from "../styles/home.css";
+// import "../styles/normalize.css";
+// import "../styles/base.css";
+import "../styles/home.css";
 
 import React from "react";
 import { connect } from "react-redux";
@@ -17,7 +17,7 @@ class Home extends React.Component {
     return (
       <div>
         <Nav {...this.props} />
-        <div className={home.container}>
+        <div styleName="container">
 
           <Typography variant="h4" color="textPrimary">Boards</Typography>
         </div>
