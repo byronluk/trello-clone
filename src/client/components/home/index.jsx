@@ -1,12 +1,11 @@
-// import "../styles/normalize.css";
-// import "../styles/base.css";
-import "../styles/home.css";
+import "../../styles/normalize.css";
+import "../../styles/base.css";
+import home from "./home.css"; // eslint-disable-line no-unused-vars
 
 import React from "react";
 import { connect } from "react-redux";
-import { Nav } from "./nav";
 
-import Typography from "@material-ui/core/Typography";
+import Nav from "../common/nav";
 
 class Home extends React.Component {
   constructor(props) {
@@ -15,13 +14,12 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div>
+      <React.Fragment>
         <Nav {...this.props} />
-        <div styleName="container">
-
-          <Typography variant="h4" color="textPrimary">Boards</Typography>
+        <div styleName="home.container">
+          Boards
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }
