@@ -11,8 +11,16 @@
   letter-spacing: 1px;
   text-decoration: none;
   font-size: 24px;
+  font-weight: 300;
 }
 
 .grow {
   flex-grow: 1
+}
+
+.log-in-button {
+  margin-right: 35px;
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: uppercase;
 }

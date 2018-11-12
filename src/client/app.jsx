@@ -5,28 +5,30 @@
 import React from "react";
 import { render, hydrate } from "react-dom";
 import { routes } from "./routes";
-import { BrowserRouter } from "react-router-dom";
+import { Router } from "react-router-dom";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./reducers";
 import { renderRoutes } from "react-router-config";
+import { createBrowserHistory, createMemoryHistory } from "history";
+import { canUseDOM } from "./utils";
 
 //
 // PWA registration
 //
-import { notify } from "react-notify-toast";
+// import { notify } from "react-notify-toast";
 
 //
 // Add the client app start up code to a function as window.webappStart.
 // The webapp's full HTML will check and call it once the js-content
 // DOM is created.
-require.ensure(
-  ["./sw-registration"],
-  require => {
-    require("./sw-registration")(notify);
-  },
-  "sw-registration"
-);
+// require.ensure(
+//   ["./sw-registration"],
+//   require => {
+//     require("./sw-registration")(notify);
+//   },
+//   "sw-registration"
+// );
 //
 
 //
@@ -45,7 +47,9 @@ const configureStore = initialState => {
   return store;
 };
 
-const store = configureStore(window.__PRELOADED_STATE__);
+const store = configureStore(canUseDOM ? window.__PRELOADED_STATE__ : undefined);
+
+const history = canUseDOM ? createBrowserHistory() : createMemoryHistory();
 
 const start = App => {
   const jsContent = document.querySelector(".js-content");
@@ -53,15 +57,17 @@ const start = App => {
 
   reactStart(
     <Provider store={store}>
-      <BrowserRouter>
+      <Router history={history}>
         <App />
-      </BrowserRouter>
+      </Router>
     </Provider>,
     jsContent
   );
 };
 
-window.webappStart = () => start(() => renderRoutes(routes));
+if (canUseDOM) {
+  window.webappStart = () => start(() => renderRoutes(routes));
+}
 
 //
 // Hot Module Reload setup
@@ -72,3 +78,5 @@ if (module.hot) {
     start(() => renderRoutes(r.routes));
   });
 }
+
+export { history };

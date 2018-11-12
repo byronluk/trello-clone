@@ -1,9 +1,10 @@
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+
 import "../../styles/normalize.css";
 import "../../styles/base.css";
 import home from "./home.css"; // eslint-disable-line no-unused-vars
-
-import React from "react";
-import { connect } from "react-redux";
 
 import Nav from "../common/nav";
 
@@ -13,21 +14,22 @@ class Home extends React.Component {
   }
 
   render() {
+    const { auth } = this.props;
     return (
       <React.Fragment>
-        <Nav {...this.props} />
-        <div styleName="home.container">
-          Boards
-        </div>
+        <Nav auth={auth} />
+        <div styleName="home.container">Boards</div>
       </React.Fragment>
     );
   }
 }
 
-Home.propTypes = {};
+Home.propTypes = {
+  auth: PropTypes.object
+};
 
-const mapStateToProps = () => {
-  return {};
+const mapStateToProps = ({ auth }) => {
+  return { auth };
 };
 
 export default connect(

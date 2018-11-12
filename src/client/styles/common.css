@@ -2,15 +2,31 @@
   color: #ffffff;
 }
 
-.color-primary {
+.primary {
   background-color: #3f51b5;
-  color: #3f51b5;
 }
+
+/*----------------- BUTTONS -----------------*/
+.button-outline {
+  background-color: transparent;
+  color: white;
+  border: none;
+  font-family: Roboto, sans-serif;
+  border-radius: 4px;
+}
+.button-outline:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+  text-decoration: none;
+}
+.button-outline:focus {
+  outline: none;
+}
+/*----------------- BUTTONS -----------------*/
 
 .title {
   font-family: Roboto, sans-serif;
 }
 
 .text {
-  font-family: "Open Sans", sans-serif;;
+  font-family: "Open Sans", sans-serif;
 }

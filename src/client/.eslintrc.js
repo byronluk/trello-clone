@@ -7,5 +7,8 @@ function dotify(p) {
 }
 
 module.exports = {
+  env: {
+    "browser": true
+  },
   extends: dotify(path.relative(__dirname, archetypeEslint))
 };
