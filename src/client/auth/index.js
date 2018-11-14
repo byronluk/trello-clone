@@ -1,6 +1,8 @@
 import auth0 from "auth0-js";
 
-const config = {
+import { history } from "../app";
+
+const auth0Config = {
   domain: process.env.AUTH0_DOMAIN,
   clientID: process.env.AUTH0_CLIENTID,
   redirectUri: process.env.AUTH0_REDIRECT_URI,
@@ -8,11 +10,9 @@ const config = {
   scope: process.env.AUTH0_SCOPE
 };
 
-import { history } from "../app";
-
 export default class Auth {
   constructor() {
-    this.auth0 = new auth0.WebAuth(config);
+    this.auth0 = new auth0.WebAuth(auth0Config);
   }
 
   handleAuthentication() {
