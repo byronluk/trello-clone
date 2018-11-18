@@ -6,7 +6,7 @@ import React from "react";
 import { render, hydrate } from "react-dom";
 import { routes } from "./routes";
 import { Router } from "react-router-dom";
-import { createStore } from "redux";
+import { createStore, compose } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./reducers";
 import { renderRoutes } from "react-router-config";
@@ -34,8 +34,13 @@ import { canUseDOM } from "./utils";
 //
 // Redux configure store with Hot Module Reload
 //
+let composeEnhancers = compose;
+if (canUseDOM && process.env.NODE_ENV === "development") {
+  composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
+}
+
 const configureStore = initialState => {
-  const store = createStore(rootReducer, initialState);
+  const store = createStore(rootReducer, initialState, composeEnhancers());
 
   if (module.hot) {
     module.hot.accept("./reducers", () => {

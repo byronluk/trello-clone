@@ -6,7 +6,9 @@ import "../../styles/normalize.css";
 import "../../styles/base.css";
 import home from "./home.css"; // eslint-disable-line no-unused-vars
 
-import Nav from "../common/nav";
+import Nav from "../nav";
+
+import auth from "../../auth";
 
 class Home extends React.Component {
   constructor(props) {
@@ -14,7 +16,6 @@ class Home extends React.Component {
   }
 
   render() {
-    const { auth } = this.props;
     return (
       <React.Fragment>
         <Nav auth={auth} />
@@ -28,8 +29,8 @@ Home.propTypes = {
   auth: PropTypes.object
 };
 
-const mapStateToProps = ({ auth }) => {
-  return { auth };
+const mapStateToProps = () => {
+  return {};
 };
 
 export default connect(

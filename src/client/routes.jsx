@@ -1,6 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
+
 import Home from "./components/home";
+import AuthCallback from "./auth/callback";
+
 import { withRouter } from "react-router-dom";
 import { renderRoutes } from "react-router-config";
 
@@ -29,6 +32,11 @@ const routes = [
         exact: true,
         init: "./init-home",
         component: Home
+      },
+      {
+        path: "/callback",
+        exact: true,
+        component: AuthCallback
       }
     ]
   }

@@ -10,41 +10,38 @@ const auth0Config = {
   scope: process.env.AUTH0_SCOPE
 };
 
-export default class Auth {
+class Auth {
   constructor() {
     this.auth0 = new auth0.WebAuth(auth0Config);
+
+    this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
-  handleAuthentication() {
-    this.auth0.parseHash((err, authResult) => {
-      if (authResult && authResult.accessToken && authResult.idToken) {
-        this.setSession(authResult);
-        history.replace("/home");
-      } else if (err) {
-        history.replace("/home");
-        console.log(err); // eslint-disable-line
-      }
-    });
+  handleAuthentication(cbk) {
+    this.auth0.parseHash(cbk);
   }
 
   setSession(authResult) {
-    const expiresAt = JSON.stringify(authResult.expiresIn * 1000 + new Date().getTime()); // eslint-disable-line
+    const multiplier = 1000;
+    const expiresAt = JSON.stringify(authResult.expiresIn * multiplier + new Date().getTime());
 
     localStorage.setItem("access_token", authResult.accessToken);
     localStorage.setItem("id_token", authResult.idToken);
     localStorage.setItem("expires_at", expiresAt);
-    history.replace("/home");
   }
 
   logout() {
     localStorage.removeItem("access_token");
     localStorage.removeItem("id_token");
     localStorage.removeItem("expires_at");
-    history.replace("/home");
+    history.replace("/");
   }
 
-  isAuthenticated() {
-    const expiresAt = JSON.parse(localStorage.getItem("expires_at"));
+  static isAuthenticated(expiresAt) {
+    if (typeof expiresAt === "undefined") {
+      expiresAt = JSON.parse(localStorage.getItem("expires_at"));
+    }
     return new Date().getTime() < expiresAt;
   }
 
@@ -52,3 +49,6 @@ export default class Auth {
     this.auth0.authorize();
   }
 }
+
+const auth = new Auth();
+export default auth;
