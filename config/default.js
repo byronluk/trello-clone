@@ -23,5 +23,10 @@ module.exports = {
         }
       }
     }
+  },
+  plugins: {
+    api: {
+      module: "./{{env.APP_SRC_DIR}}/server/plugins/api"
+    }
   }
 };
