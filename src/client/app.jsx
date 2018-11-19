@@ -6,12 +6,10 @@ import React from "react";
 import { render, hydrate } from "react-dom";
 import { routes } from "./routes";
 import { Router } from "react-router-dom";
-import { createStore, compose } from "redux";
 import { Provider } from "react-redux";
-import rootReducer from "./reducers";
 import { renderRoutes } from "react-router-config";
-import { createBrowserHistory, createMemoryHistory } from "history";
 import { canUseDOM } from "./utils";
+import store, { history } from "./store";
 
 //
 // PWA registration
@@ -34,27 +32,6 @@ import { canUseDOM } from "./utils";
 //
 // Redux configure store with Hot Module Reload
 //
-let composeEnhancers = compose;
-if (canUseDOM && process.env.NODE_ENV === "development") {
-  composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
-}
-
-const configureStore = initialState => {
-  const store = createStore(rootReducer, initialState, composeEnhancers());
-
-  if (module.hot) {
-    module.hot.accept("./reducers", () => {
-      const nextRootReducer = require("./reducers").default;
-      store.replaceReducer(nextRootReducer);
-    });
-  }
-
-  return store;
-};
-
-const store = configureStore(canUseDOM ? window.__PRELOADED_STATE__ : undefined);
-
-const history = canUseDOM ? createBrowserHistory() : createMemoryHistory();
 
 const start = App => {
   const jsContent = document.querySelector(".js-content");
@@ -83,5 +60,3 @@ if (module.hot) {
     start(() => renderRoutes(r.routes));
   });
 }
-
-export { history };

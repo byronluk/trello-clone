@@ -1,13 +1,14 @@
-import { INIT_AUTH } from "../constants/action-types"; // eslint-disable-line
+import * as actions from "../constants/action-types"; // eslint-disable-line
 
 const INIT_STATE = {
   isAuthenticated: false,
-  idToken: ""
+  idToken: "",
+  accessToken: ""
 };
 
 const authReducer = (state = INIT_STATE, action) => {
   switch (action.type) {
-    case INIT_AUTH:
+    case actions.INIT_AUTH:
       return { ...state, ...action.payload };
     default:
       return state;

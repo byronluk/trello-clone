@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 import callback from "./callback.css"; // eslint-disable-line
 
+import { initAuth } from "../../actions/auth";
 import auth from "../";
 
 class Callback extends React.Component {
@@ -13,7 +14,12 @@ class Callback extends React.Component {
 
   componentDidMount() {
     auth.handleAuthentication((err, authResult) => {
-      console.log(authResult);
+      if (err) {
+        // TODO: handle errors with error page
+        console.error(err); // eslint-disable-line
+      }
+      auth.setSession(authResult);
+      this.props.initAuth(authResult);
     });
   }
 
@@ -31,8 +37,14 @@ class Callback extends React.Component {
   }
 }
 
+Callback.propTypes = {
+  initAuth: PropTypes.func.isRequired
+};
+
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    initAuth: authResult => dispatch(initAuth(authResult))
+  };
 };
 
 export default connect(

@@ -15,14 +15,13 @@ class Auth {
     this.auth0 = new auth0.WebAuth(auth0Config);
 
     this.login = this.login.bind(this);
-    this.logout = this.logout.bind(this);
   }
 
   handleAuthentication(cbk) {
     this.auth0.parseHash(cbk);
   }
 
-  setSession(authResult) {
+   setSession(authResult) {
     const multiplier = 1000;
     const expiresAt = JSON.stringify(authResult.expiresIn * multiplier + new Date().getTime());
 
@@ -31,7 +30,7 @@ class Auth {
     localStorage.setItem("expires_at", expiresAt);
   }
 
-  logout() {
+  static logout() {
     localStorage.removeItem("access_token");
     localStorage.removeItem("id_token");
     localStorage.removeItem("expires_at");
