@@ -1,7 +1,15 @@
 {
+  "connections": {
+    "default": {
+      "routes": {
+        "cors": true
+      }
+    }
+  },
   "webapp": {
     "options": {
       "insertTokenIds": true
     }
   }
 }
+

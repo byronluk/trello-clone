@@ -1,5 +1,5 @@
 {
   "generator-electrode": {
-    "serverType": "ExpressJS"
+    "serverType": "HapiJS"
   }
 }
