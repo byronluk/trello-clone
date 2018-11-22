@@ -13,6 +13,7 @@ class Callback extends React.Component {
   }
 
   componentDidMount() {
+    // TODO: throw error page if this component is loaded w/o url params
     auth.handleAuthentication((err, authResult) => {
       if (err) {
         // TODO: handle errors with error page

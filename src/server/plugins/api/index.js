@@ -3,15 +3,18 @@
 const plugin = {};
 
 plugin.register = function(server, options, next) {
-  console.log("api plugin");
   server.route({
     method: "GET",
-    path: "/testing",
-    handler: (request, reply) => {
-      console.log('hello');
-      reply(null, "hello")
+    path: "/account/init",
+    handler: (request, h) => {
+      /* eslint-disable no-console */
+      console.log("handling account init request");
+      console.log(request.query);
+
+      h(null, "hello");
     }
   });
+
   next();
 };
 
