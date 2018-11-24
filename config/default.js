@@ -9,6 +9,7 @@ const portFromEnv = () => {
 };
 
 module.exports = {
+  port: portFromEnv(),
   plugins: {
     api: {
       module: "./{{env.APP_SRC_DIR}}/server/plugins/api"
