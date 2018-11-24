@@ -1,9 +1,27 @@
 {
+  "plugins": {
+    "inert": {
+      "enable": true
+    },
+    "electrodeStaticPaths": {
+      "enable": true,
+      "options": {
+        "pathPrefix": "dist"
+      }
+    }
+  },
+  "server": {
+    "connections": {
+      "compression": true
+    },
+    "debug": {
+      "log": false,
+      "request": false
+    }
+  },
   "connections": {
     "default": {
-      "routes": {
-        "cors": false
-      }
+      "port": 8000
     }
   }
 }
