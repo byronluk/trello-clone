@@ -18,11 +18,6 @@
       "log": false,
       "request": false
     }
-  },
-  "connections": {
-    "default": {
-      "port": 8000
-    }
   }
 }
 
