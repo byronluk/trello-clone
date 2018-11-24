@@ -1,19 +1,15 @@
 "use strict";
+import routes from "./routes";
 
 const plugin = {};
 
 plugin.register = function(server, options, next) {
-  server.route({
-    method: "GET",
-    path: "/account/init",
-    handler: (request, h) => {
-      /* eslint-disable no-console */
-      console.log("handling account init request");
-      console.log(request.query);
-
-      h(null, "hello");
-    }
-  });
+  for (const prefix in routes) {
+    routes[prefix].forEach(route => {
+      route.path = `/api/${prefix}/${route.path}`;
+      server.route(route);
+    });
+  }
 
   next();
 };

@@ -7,7 +7,8 @@ const auth0Config = {
   clientID: process.env.AUTH0_CLIENTID,
   redirectUri: process.env.AUTH0_REDIRECT_URI,
   responseType: process.env.AUTH0_RESPONSE_TYPE,
-  scope: process.env.AUTH0_SCOPE
+  scope: process.env.AUTH0_SCOPE,
+  audience: process.env.AUTH0_AUDIENCE
 };
 
 class Auth {
