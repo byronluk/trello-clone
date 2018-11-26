@@ -11,8 +11,13 @@ const portFromEnv = () => {
 module.exports = {
   port: portFromEnv(),
   plugins: {
+    auth: {
+      module: "./{{env.APP_SRC_DIR}}/server/plugins/auth",
+      priority: 100
+    },
     api: {
-      module: "./{{env.APP_SRC_DIR}}/server/plugins/api"
+      module: "./{{env.APP_SRC_DIR}}/server/plugins/api",
+      priority: 200
     },
     good: {
       module: "good",
