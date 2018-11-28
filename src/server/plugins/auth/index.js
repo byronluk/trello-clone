@@ -8,7 +8,7 @@ const plugin = {};
 
 plugin.register = function(server, options, next) {
   server.register(jwt, err => {
-    if (err) console.log(err);
+    if (err) throw err;
 
     server.auth.strategy("jwt", "jwt", {
       complete: true,
@@ -20,7 +20,7 @@ plugin.register = function(server, options, next) {
       }),
       verifyOptions: {
         audience: process.env.AUTH0_AUDIENCE,
-        issuer: `https://${process.env.AUTH0_DOMAIN}`,
+        issuer: `https://${process.env.AUTH0_DOMAIN}/`,
         algorithms: ["RS256"]
       },
       validateFunc: validateUser
@@ -34,19 +34,6 @@ plugin.register = function(server, options, next) {
         handler: (req, res) => {
           res({
             message: "Hello from a public endpoint!"
-          });
-        }
-      }
-    });
-
-    server.route({
-      method: "GET",
-      path: "/api/private",
-      config: {
-        auth: "jwt",
-        handler: (req, res) => {
-          res({
-            message: "hello from a private endpoint"
           });
         }
       }

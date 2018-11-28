@@ -5,8 +5,15 @@ const plugin = {};
 
 plugin.register = function(server, options, next) {
   for (const prefix in routes) {
-    routes[prefix].forEach(route => {
-      route.path = `/api/${prefix}/${route.path}`;
+    routes[prefix].forEach(r => {
+      const route = {
+        path: `/api/${prefix}/${r.path}`,
+        method: r.method,
+        config: {
+          auth: "jwt",
+          handler: r.handler
+        }
+      };
       server.route(route);
     });
   }
